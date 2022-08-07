@@ -3,12 +3,13 @@ package ru.job4j.cars.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author Alex Gutorov
- * @version 1.0
+ * @version 1.6
  * @created 23/07/2022 - 14:02
  */
 @Getter
@@ -25,24 +26,31 @@ public class Car {
     private String name;
     private String description;
     private String body;
-    private byte[] photo;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    private boolean sold;
 
     @ManyToOne
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "history_owners", joinColumns = {
-            @JoinColumn(name = "driver_id", nullable = false, updatable = false)},
+            @JoinColumn(name = "user_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "car_id", nullable = false, updatable = false)})
-    private Set<Driver> drivers = new HashSet<>();
+    private Set<User> drivers = new HashSet<>();
 
-    public Car of(String name, String description, String body) {
+    private byte[] photo;
+
+    public Car of(String name, String description, String body, Engine engine) {
         Car car = new Car();
         car.name = name;
         car.description = description;
         car.body = body;
+        car.engine = engine;
         return car;
     }
 }

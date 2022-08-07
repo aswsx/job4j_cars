@@ -15,7 +15,8 @@
         <property name="hibernate.jdbc.time_zone">Asia/Dhaka</property>
 
         <mapping class="ru.job4j.cars.models.Engine"/>
-        <mapping class="ru.job4j.cars.models.Driver"/>
+        <mapping class="ru.job4j.cars.models.User"/>
         <mapping class="ru.job4j.cars.models.Car"/>
+        <mapping class="ru.job4j.cars.models.Advertisement"/>
     </session-factory>
 </hibernate-configuration>
