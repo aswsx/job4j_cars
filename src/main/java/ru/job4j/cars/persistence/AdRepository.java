@@ -18,7 +18,7 @@ public class AdRepository implements DBStore {
     /*
     показать объявления за последний день;
      */
-    public List<Advertisement> TodayAdvs() {
+    public List<Advertisement> todayAdvs() {
         return tx(session -> session.createQuery(
                 "select distinct a from Advertisement a "
                         + "join fetch a.car c "
@@ -31,7 +31,7 @@ public class AdRepository implements DBStore {
     /*
     показать объявления с фото;
      */
-    public List<Advertisement> AdvsWithPhoto() {
+    public List<Advertisement> advsWithPhoto() {
         return tx(session -> session.createQuery(
                 "select distinct a from Advertisement a "
                         + "join fetch a.car c "
