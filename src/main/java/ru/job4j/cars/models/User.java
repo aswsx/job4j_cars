@@ -3,28 +3,24 @@ package ru.job4j.cars.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Alex Gutorov
  * @version 1.0
- * @created 23/07/2022 - 14:02
+ * @created 26/07/2022 - 15:27
  */
 @Getter
 @Setter
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
-@Table(name = "drivers")
-public class Driver {
+@Table(name = "users")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-
-    public Driver of(String name) {
-        Driver driver = new Driver();
-        driver.name = name;
-        return driver;
-    }
+    private String email;
+    private String password;
 }
